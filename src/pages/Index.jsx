@@ -20,6 +20,8 @@ import { FaTrash } from "react-icons/fa";
 const Index = () => {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [editIndex, setEditIndex] = useState(null);
+  const [editValue, setEditValue] = useState("");
 
   const handleAddTodo = () => {
     if (inputValue.trim() !== "") {
@@ -37,6 +39,19 @@ const Index = () => {
   const handleDeleteTodo = (index) => {
     const newTodos = todos.filter((_, i) => i !== index);
     setTodos(newTodos);
+  };
+
+  const handleEditTodo = (index) => {
+    setEditIndex(index);
+    setEditValue(todos[index].text);
+  };
+
+  const handleSaveTodo = (index) => {
+    const newTodos = [...todos];
+    newTodos[index].text = editValue;
+    setTodos(newTodos);
+    setEditIndex(null);
+    setEditValue("");
   };
 
   return (
@@ -62,19 +77,37 @@ const Index = () => {
           {todos.map((todo, index) => (
             <ListItem key={index} p={2} borderWidth="1px" borderRadius="md">
               <Flex align="center">
-                <Checkbox
-                  isChecked={todo.completed}
-                  onChange={() => handleToggleComplete(index)}
-                >
-                  <Text as={todo.completed ? "s" : ""}>{todo.text}</Text>
-                </Checkbox>
-                <Spacer />
-                <IconButton
-                  aria-label="Delete todo"
-                  icon={<FaTrash />}
-                  size="sm"
-                  onClick={() => handleDeleteTodo(index)}
-                />
+                {editIndex === index ? (
+                  <>
+                    <Input
+                      value={editValue}
+                      onChange={(e) => setEditValue(e.target.value)}
+                      mr={2}
+                    />
+                    <Button onClick={() => handleSaveTodo(index)} colorScheme="teal" mr={2}>
+                      Save
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Checkbox
+                      isChecked={todo.completed}
+                      onChange={() => handleToggleComplete(index)}
+                    >
+                      <Text as={todo.completed ? "s" : ""}>{todo.text}</Text>
+                    </Checkbox>
+                    <Spacer />
+                    <Button onClick={() => handleEditTodo(index)} colorScheme="blue" size="sm" mr={2}>
+                      Edit
+                    </Button>
+                    <IconButton
+                      aria-label="Delete todo"
+                      icon={<FaTrash />}
+                      size="sm"
+                      onClick={() => handleDeleteTodo(index)}
+                    />
+                  </>
+                )}
               </Flex>
             </ListItem>
           ))}
