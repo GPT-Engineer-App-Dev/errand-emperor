@@ -76,8 +76,9 @@ const Index = () => {
             </ListItem>
           ))}
         </List>
-        <Box as="footer" pt={10}>
-          <Text>Footer Placeholder Text</Text>
+        <Box as="footer" pt={10} width="100%" textAlign="center" borderTop="1px" borderColor="gray.200" mt={10} py={4}>
+          <Text fontSize="lg" mb={2}>"I'm not procrastinating, I'm prioritizing!"</Text>
+          <Text fontSize="sm" color="gray.500">&copy; {new Date().getFullYear()} The Ultimate Procrastination List. All rights reserved.</Text>
         </Box>
       </VStack>
     </Container>
