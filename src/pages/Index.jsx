@@ -42,9 +42,12 @@ const Index = () => {
   return (
     <Container maxW="container.md" py={10}>
       <VStack spacing={6}>
-        <Heading as="h1" size="2xl">
-          The Ultimate Procrastination List
-        </Heading>
+        <Box as="header" width="100%" bg="teal.500" color="white" py={4} px={6} borderRadius="md">
+          <Heading as="h1" size="lg">
+            Todo App
+          </Heading>
+          <Text fontSize="md">Stay organized and productive</Text>
+        </Box>
         <HStack width="100%">
           <Input
             placeholder="Add a new todo"
