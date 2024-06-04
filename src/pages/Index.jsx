@@ -112,8 +112,9 @@ const Index = () => {
             </ListItem>
           ))}
         </List>
-        <Box as="footer" pt={10}>
-          <Text>Footer Placeholder Text</Text>
+        <Box as="footer" pt={10} width="100%" bg="teal.500" color="white" py={4} px={6} borderRadius="md" textAlign="center">
+          <Text fontSize="lg" mb={2}>"I'm not procrastinating, I'm doing side quests!"</Text>
+          <Text fontSize="sm">© {new Date().getFullYear()} Todo App. All rights reserved.</Text>
         </Box>
       </VStack>
     </Container>
